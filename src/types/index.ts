@@ -9,6 +9,17 @@ export interface StorageOption {
   price: number;
 }
 
+export interface Specs {
+  screen: string;
+  resolution: string;
+  processor: string;
+  mainCamera: string;
+  selfieCamera: string;
+  battery: string;
+  os: string;
+  screenRefreshRate: string;
+}
+
 export interface Phone {
   id: string;
   brand: string;
@@ -17,16 +28,21 @@ export interface Phone {
   imageUrl: string;
 }
 
-export interface PhoneDetail extends Phone {
+export interface PhoneDetail {
+  id: string;
+  brand: string;
+  name: string;
   description: string;
-  specs: Record<string, string>;
+  basePrice: number;
+  rating: number;
+  specs: Specs;
   colorOptions: ColorOption[];
   storageOptions: StorageOption[];
   similarProducts: Phone[];
 }
 
 export interface CartItem {
-  id: string;
+  cartItemId: string;
   phoneId: string;
   brand: string;
   name: string;
