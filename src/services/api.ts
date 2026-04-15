@@ -1,36 +1,55 @@
 import { Phone, PhoneDetail } from '@/types';
 
 const BASE_URL = 'https://prueba-tecnica-api-tienda-moviles.onrender.com';
-const API_KEY = '87909682e6cd74208f41a6ef39fe4191';
 
 const headers = {
-  'x-api-key': API_KEY,
+  'x-api-key': process.env.NEXT_PUBLIC_API_KEY ?? '',
 };
 
-export async function getPhones(search?: string): Promise<Phone[]> {
-  const params = new URLSearchParams();
-  if (search) params.set('search', search);
+export class ApiError extends Error {
+  status: number;
 
-  const query = params.toString();
-  const url = query ? `${BASE_URL}/products?${query}` : `${BASE_URL}/products`;
+  constructor(status: number, message: string) {
+    super(message);
+    this.name = 'ApiError';
+    this.status = status;
+  }
+}
 
+async function apiFetch<T>(url: string, context: string): Promise<T> {
   const res = await fetch(url, { headers });
 
   if (!res.ok) {
-    const body = await res.text();
-    console.error(`[getPhones] ${res.status} ${res.statusText} — URL: ${url} — body: ${body}`);
-    throw new Error(`Failed to fetch phones: ${res.status} ${res.statusText}`);
+    if (res.status === 401) {
+      throw new ApiError(401, 'Service temporarily unavailable. Please try again later.');
+    }
+    if (res.status === 404) {
+      throw new ApiError(404, context + ' not found.');
+    }
+    throw new ApiError(res.status, 'Something went wrong. Please try again.');
   }
 
   return res.json();
 }
 
+export async function getPhones(search?: string): Promise<Phone[]> {
+  const params = new URLSearchParams();
+  if (search) {
+    params.set('search', search);
+  } else {
+    params.set('limit', '20');
+  }
+
+  const url = BASE_URL + '/products?' + params.toString();
+
+  const phones = await apiFetch<Phone[]>(url, 'Phones');
+  return phones.filter((p, index, arr) => arr.findIndex((x) => x.id === p.id) === index);
+}
+
 export async function getPhoneById(id: string): Promise<PhoneDetail> {
-  const res = await fetch(`${BASE_URL}/products/${id}`, {
-    headers,
-  });
-
-  if (!res.ok) throw new Error(`Failed to fetch phone with id: ${id}: ${res.status} ${res.statusText}`);
-
-  return res.json();
+  const phone = await apiFetch<PhoneDetail>(BASE_URL + '/products/' + id, 'Phone');
+  phone.similarProducts = phone.similarProducts.filter(
+    (p, index, arr) => arr.findIndex((x) => x.id === p.id) === index,
+  );
+  return phone;
 }
