@@ -1,0 +1,83 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  padding: 24px 16px;
+  background-color: var(--color-background);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  width: 74px;
+  height: 24px;
+}
+
+.logo svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cartLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+}
+
+.cartLink svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.cartCount {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: var(--color-foreground);
+}
+
+.loadingTrack {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  overflow: hidden;
+}
+
+.loadingBar {
+  height: 1px;
+  width: 100%;
+  background-color: var(--color-foreground);
+  transform: translateX(-100%);
+  animation: navLoading 1.2s ease-in-out infinite;
+}
+
+@keyframes navLoading {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (min-width: 768px) {
+  .nav {
+    padding: 24px 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nav {
+    padding: 24px 100px;
+  }
+}

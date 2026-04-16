@@ -1,0 +1,87 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px 16px 12px;
+  background-color: var(--color-background);
+  position: sticky;
+  top: 80px;
+  z-index: 99;
+}
+
+.inputFrame {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-bottom: 0.5px solid var(--color-foreground);
+  padding-bottom: 8px;
+  gap: 12px;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-foreground);
+}
+
+.input::placeholder {
+  color: var(--color-muted);
+}
+
+.clearButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-foreground);
+  flex-shrink: 0;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.results {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-foreground);
+}
+
+.filterButton {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-foreground);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    padding: 48px 40px 12px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wrapper {
+    padding: 48px 100px 12px;
+  }
+}

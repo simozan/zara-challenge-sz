@@ -32,18 +32,33 @@ async function apiFetch<T>(url: string, context: string): Promise<T> {
   return res.json();
 }
 
+function dedupe(phones: Phone[]): Phone[] {
+  return phones.filter((p, index, arr) => arr.findIndex((x) => x.id === p.id) === index);
+}
+
 export async function getPhones(search?: string): Promise<Phone[]> {
-  const params = new URLSearchParams();
   if (search) {
-    params.set('search', search);
-  } else {
-    params.set('limit', '20');
+    const url = BASE_URL + '/products?' + new URLSearchParams({ search }).toString();
+    return dedupe(await apiFetch<Phone[]>(url, 'Phones'));
   }
 
-  const url = BASE_URL + '/products?' + params.toString();
+  let accumulated: Phone[] = [];
+  let offset = 0;
 
-  const phones = await apiFetch<Phone[]>(url, 'Phones');
-  return phones.filter((p, index, arr) => arr.findIndex((x) => x.id === p.id) === index);
+  while (accumulated.length < 20) {
+    const needed = 20 - accumulated.length;
+    const raw = await apiFetch<Phone[]>(
+      BASE_URL +
+        '/products?' +
+        new URLSearchParams({ limit: String(needed), offset: String(offset) }).toString(),
+      'Phones',
+    );
+    accumulated = dedupe([...accumulated, ...raw]);
+    if (raw.length < needed) break;
+    offset += needed;
+  }
+
+  return accumulated.slice(0, 20);
 }
 
 export async function getPhoneById(id: string): Promise<PhoneDetail> {

@@ -26,6 +26,7 @@ export interface Phone {
   name: string;
   basePrice: number;
   imageUrl: string;
+  colorOptions?: ColorOption[];
 }
 
 export interface PhoneDetail {

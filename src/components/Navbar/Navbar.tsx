@@ -2,55 +2,33 @@
 
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
+import { useLoading } from '@/context/LoadingContext';
+import Logo from '@/assets/icons/logo.svg';
+import CartIcon from '@/assets/icons/cart.svg';
+import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const { itemCount } = useCart();
+  const { loading } = useLoading();
 
   return (
-    <nav
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '1rem',
-        borderBottom: '1px solid #e0e0e0',
-        background: 'white',
-        position: 'sticky',
-        top: 0,
-        zIndex: 100,
-      }}
-    >
-      <Link href="/" style={{ fontWeight: 'bold', fontSize: '1.2rem', letterSpacing: '0.1em' }}>
-        MBST
+    <nav className={styles.nav} role="banner">
+      <Link href="/" className={styles.logo} aria-label="Go to home">
+        <Logo aria-hidden="true" />
       </Link>
-
       <Link
         href="/cart"
-        style={{ position: 'relative', fontSize: '1.2rem' }}
-        aria-label={itemCount > 0 ? `Cart (${itemCount} items)` : 'Cart'}
+        className={styles.cartLink}
+        aria-label={itemCount > 0 ? `Cart, ${itemCount} items` : 'Cart, 0 items'}
       >
-        🛒
-        {itemCount > 0 && (
-          <span
-            style={{
-              position: 'absolute',
-              top: '-8px',
-              right: '-10px',
-              background: 'black',
-              color: 'white',
-              borderRadius: '50%',
-              fontSize: '10px',
-              width: '16px',
-              height: '16px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            {itemCount}
-          </span>
-        )}
+        <CartIcon aria-hidden="true" />
+        <span className={styles.cartCount}>{itemCount}</span>
       </Link>
+      {loading && (
+        <div className={styles.loadingTrack}>
+          <div className={styles.loadingBar} />
+        </div>
+      )}
     </nav>
   );
 }

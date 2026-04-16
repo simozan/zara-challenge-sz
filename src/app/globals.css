@@ -3,6 +3,8 @@
   --color-foreground: #000000;
   --color-gray: #888888;
   --color-gray-light: #f4f4f4;
+  --color-muted: #aaaaaa;
+  --color-subtle: #79736d;
   --color-border: #e0e0e0;
   --color-accent: #ff0000;
   --font-family: Helvetica, Arial, sans-serif;
