@@ -1,0 +1,407 @@
+/* ── Centered 1200px container ── */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── Hero: back link + image + product info — fills screen height on mobile ── */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  height: calc(100svh - 80px);
+}
+
+/* ── Back link ── */
+
+.back {
+  flex-shrink: 0;
+  display: inline-block;
+  padding: 24px 0 0 16px;
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-foreground);
+}
+
+/* ── Two-column content (image + product info) ── */
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+  gap: 40px;
+  min-height: 0;
+}
+
+.imageWrapper {
+  flex: 1;
+  min-height: 0;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+
+/* ── Product info panel ── */
+
+.productInfo {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 16px 8px;
+}
+
+.nameBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.name {
+  font-family: var(--font-family);
+  font-size: 20px;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-foreground);
+}
+
+.price {
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-foreground);
+}
+
+/* ── Section label (STORAGE, COLOR) ── */
+
+.sectionLabel {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-foreground);
+  margin-bottom: 16px;
+}
+
+/* ── Storage options ── */
+
+.storageOptions {
+  display: flex;
+}
+
+.storageBtn {
+  width: 89px;
+  height: 48px;
+  border: 1px solid #ccc;
+  background: transparent;
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-foreground);
+  cursor: pointer;
+  padding: 0 24px;
+  white-space: nowrap;
+}
+
+.storageBtnSelected {
+  box-shadow: inset 0 0 0 1px var(--color-foreground);
+}
+
+/* ── Color options ── */
+
+.colorOptions {
+  display: flex;
+  gap: 8px;
+}
+
+.colorSwatch {
+  width: 36px;
+  height: 36px;
+  border: 0.5px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.colorSwatchSelected {
+  outline: 1px solid var(--color-foreground);
+  outline-offset: 2px;
+}
+
+.colorName {
+  margin-top: 8px;
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-foreground);
+  min-height: 12px;
+}
+
+/* ── Add to cart ── */
+
+.addToCart {
+  width: 100%;
+  height: 48px;
+  border: none;
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  background: var(--color-gray-light);
+  color: var(--color-muted);
+  cursor: not-allowed;
+}
+
+.addToCartEnabled {
+  background: var(--color-foreground);
+  color: var(--color-background);
+  cursor: pointer;
+}
+
+/* ── Specifications ── */
+
+.specsSection {
+  padding: 0 16px 48px;
+  border-top: 0.5px solid var(--color-foreground);
+}
+
+.specsTitle {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-foreground);
+  padding: 24px 0 16px;
+}
+
+.specsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.specsRow {
+  border-bottom: 0.5px solid var(--color-foreground);
+}
+
+.specsLabel {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-foreground);
+  padding: 14px 0;
+  width: 40%;
+  vertical-align: top;
+}
+
+.specsValue {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--color-foreground);
+  padding: 14px 0;
+}
+
+/* ── Similar products ── */
+
+.similarSection {
+  padding: 0 16px 48px;
+}
+
+.similarTitle {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-foreground);
+  padding-bottom: 16px;
+  border-bottom: 0.5px solid var(--color-foreground);
+}
+
+.similarGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-left: 0.5px solid var(--color-foreground);
+  border-top: 0.5px solid var(--color-foreground);
+}
+
+.similarCard {
+  display: flex;
+  flex-direction: column;
+  border-right: 0.5px solid var(--color-foreground);
+  border-bottom: 0.5px solid var(--color-foreground);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+.similarCard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-foreground);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.similarCard:hover::after {
+  transform: translateY(0);
+}
+
+.similarImageWrapper {
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.similarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.similarInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px;
+  height: 31px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.similarCard:hover .similarInfo {
+  color: var(--color-background);
+}
+
+.similarBrand {
+  font-family: var(--font-family);
+  font-size: 10px;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-subtle);
+}
+
+.similarCard:hover .similarBrand {
+  color: var(--color-background);
+  opacity: 0.7;
+}
+
+.similarName {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.similarPrice {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+/* ── Tablet ── */
+
+@media (min-width: 768px) {
+  .back {
+    padding-left: 40px;
+  }
+
+  .content {
+    padding: 0 40px;
+  }
+
+  .specsSection {
+    padding: 0 40px 48px;
+  }
+
+  .similarSection {
+    padding: 0 40px 48px;
+  }
+
+  .similarGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ── Desktop ── */
+
+@media (min-width: 1024px) {
+  .hero {
+    min-height: unset;
+  }
+
+  .back {
+    padding-left: 0;
+  }
+
+  .content {
+    flex-direction: row;
+    padding: 0;
+    gap: 0;
+    align-items: flex-start;
+    flex: none;
+  }
+
+  .imageWrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 0;
+    min-height: unset;
+  }
+
+  .image {
+    width: 100%;
+    height: 500px;
+    object-fit: contain;
+    object-position: center center;
+  }
+
+  .productInfo {
+    flex-shrink: 0;
+    width: 380px;
+    gap: 64px;
+    padding: 16px 8px;
+  }
+
+  .specsSection {
+    padding: 0 0 48px;
+  }
+
+  .similarSection {
+    padding: 0 0 48px;
+  }
+
+  .similarGrid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
