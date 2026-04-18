@@ -46,12 +46,11 @@
 }
 
 .brand {
-  font-family: var(--font-family);
   font-size: 10px;
   font-weight: 300;
   line-height: 1;
   text-transform: uppercase;
-  color: var(--color-subtle);
+  color: var(--color-text-subtle);
   transition: color 0.4s ease;
 }
 
@@ -63,7 +62,6 @@
 }
 
 .name {
-  font-family: var(--font-family);
   font-size: 12px;
   font-weight: 300;
   line-height: 1;
@@ -73,7 +71,6 @@
 }
 
 .price {
-  font-family: var(--font-family);
   font-size: 12px;
   font-weight: 300;
   line-height: 1;

@@ -1,13 +1,35 @@
 :root {
+  /* Base */
   --color-background: #ffffff;
   --color-foreground: #000000;
-  --color-gray: #888888;
-  --color-gray-light: #f4f4f4;
-  --color-muted: #aaaaaa;
-  --color-subtle: #79736d;
-  --color-border: #e0e0e0;
-  --color-accent: #ff0000;
   --font-family: Helvetica, Arial, sans-serif;
+
+  /* Text */
+  --color-text-muted: #aaaaaa;
+  --color-text-subtle: #79736d;
+
+  /* Surfaces */
+  --color-surface: #f4f4f4;
+
+  /* Borders */
+  --color-border: #e0e0e0;
+  --color-border-strong: #cccccc;
+
+  /* Layout */
+  --navbar-height: 80px;
+  --page-x: 16px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --page-x: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --page-x: 100px;
+  }
 }
 
 *,
@@ -31,6 +53,11 @@ body {
   color: var(--color-foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input {
+  font-family: inherit;
 }
 
 a {

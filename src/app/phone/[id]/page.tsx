@@ -20,6 +20,7 @@ export default function PhoneDetailPage() {
   const [phone, setPhone] = useState<PhoneDetail | null>(null);
   const [isNotFound, setIsNotFound] = useState(false);
   const [selectedColor, setSelectedColor] = useState<ColorOption | null>(null);
+  const [hoveredColor, setHoveredColor] = useState<ColorOption | null>(null);
   const [selectedStorage, setSelectedStorage] = useState<StorageOption | null>(null);
 
   useEffect(() => {
@@ -113,11 +114,17 @@ export default function PhoneDetailPage() {
 
               <div>
                 <p className={styles.sectionLabel}>Color. Pick your favourite.</p>
-                <div role="group" aria-label="Color options" className={styles.colorOptions}>
+                <div
+                  role="group"
+                  aria-label="Color options"
+                  className={styles.colorOptions}
+                  onMouseLeave={() => setHoveredColor(null)}
+                >
                   {phone.colorOptions.map((c) => (
                     <button
                       key={c.name}
                       onClick={() => setSelectedColor(c)}
+                      onMouseEnter={() => setHoveredColor(c)}
                       aria-label={c.name}
                       aria-pressed={selectedColor?.name === c.name}
                       className={`${styles.colorSwatch}${selectedColor?.name === c.name ? ` ${styles.colorSwatchSelected}` : ''}`}
@@ -125,7 +132,9 @@ export default function PhoneDetailPage() {
                     />
                   ))}
                 </div>
-                <p className={styles.colorName}>{selectedColor?.name ?? '\u00A0'}</p>
+                <p className={styles.colorName}>
+                  {hoveredColor?.name ?? selectedColor?.name ?? '\u00A0'}
+                </p>
               </div>
 
               <button
