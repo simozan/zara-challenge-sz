@@ -6,9 +6,9 @@
   margin: 0 auto;
 }
 
-/* ── Hero: back link + image + product info — fills screen height on mobile ── */
+/* ── Above-fold wrapper — fills screen height on mobile ── */
 
-.hero {
+.aboveFold {
   display: flex;
   flex-direction: column;
   height: calc(100svh - var(--navbar-height));
@@ -18,8 +18,10 @@
 
 .back {
   flex-shrink: 0;
-  display: inline-block;
-  padding: 24px 0 0 var(--page-x);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px var(--page-x);
   font-size: 12px;
   font-weight: 300;
   text-transform: uppercase;
@@ -27,25 +29,33 @@
   color: var(--color-foreground);
 }
 
+/* ── Hero section (image + product info) ── */
+
+.hero {
+  flex: 1;
+  min-height: 0;
+}
+
 /* ── Two-column content (image + product info) ── */
 
 .content {
-  flex: 1;
+  height: 100%;
   display: flex;
   flex-direction: column;
   padding: 0 var(--page-x);
   gap: 40px;
-  min-height: 0;
 }
 
 .imageWrapper {
   flex: 1;
   min-height: 0;
+  display: flex;
+  align-items: center;
 }
 
 .image {
-  width: 100%;
-  height: 100%;
+  width: 344px;
+  height: 344px;
   object-fit: contain;
   object-position: left center;
 }
@@ -101,7 +111,7 @@
 .storageBtn {
   width: 89px;
   height: 48px;
-  border: 1px solid var(--color-border-strong);
+  border: 1px solid var(--color-subtle);
   background: transparent;
   font-size: 12px;
   font-weight: 300;
@@ -122,6 +132,10 @@
 .colorOptions {
   display: flex;
   gap: 8px;
+}
+
+.colorOptions:has([data-swatch]:hover) ~ .colorName {
+  visibility: hidden;
 }
 
 .colorSwatch {
@@ -174,17 +188,18 @@
 /* ── Specifications ── */
 
 .specsSection {
-  padding: 0 var(--page-x) 48px;
-  border-top: 0.5px solid var(--color-foreground);
+  padding: 80px var(--page-x) 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .specsTitle {
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 300;
   text-transform: uppercase;
   line-height: 1;
   color: var(--color-foreground);
-  padding: 24px 0 16px;
 }
 
 .specsTable {
@@ -202,7 +217,7 @@
   text-transform: uppercase;
   line-height: 1;
   color: var(--color-foreground);
-  padding: 14px 0;
+  padding: 16px 0;
   width: 40%;
   vertical-align: top;
 }
@@ -212,111 +227,92 @@
   font-weight: 300;
   line-height: 1.4;
   color: var(--color-foreground);
-  padding: 14px 0;
+  padding: 16px 0;
 }
 
 /* ── Similar products ── */
 
 .similarSection {
-  padding: 0 var(--page-x) 48px;
+  padding: 80px var(--page-x) 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .similarTitle {
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 300;
   text-transform: uppercase;
   line-height: 1;
   color: var(--color-foreground);
-  padding-bottom: 16px;
-  border-bottom: 0.5px solid var(--color-foreground);
 }
 
-.similarGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.similarScroll {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
   border-left: 0.5px solid var(--color-foreground);
   border-top: 0.5px solid var(--color-foreground);
 }
 
-.similarCard {
-  display: flex;
-  flex-direction: column;
-  border-right: 0.5px solid var(--color-foreground);
-  border-bottom: 0.5px solid var(--color-foreground);
-  cursor: pointer;
-  overflow: hidden;
-  position: relative;
+.similarScroll::-webkit-scrollbar {
+  display: none;
 }
 
-.similarCard::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--color-foreground);
-  transform: translateY(100%);
-  transition: transform 0.3s ease;
-  pointer-events: none;
+.similarCardWrapper {
+  flex-shrink: 0;
+  width: 344px;
 }
 
-.similarCard:hover::after {
-  transform: translateY(0);
-}
-
-.similarImageWrapper {
-  width: 100%;
-  aspect-ratio: 1;
-}
-
-.similarImage {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.similarInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 8px;
-  height: 31px;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-}
-
-.similarCard:hover .similarInfo {
-  color: var(--color-background);
-}
-
-.similarBrand {
-  font-size: 10px;
-  font-weight: 300;
-  text-transform: uppercase;
-  line-height: 1;
-  color: var(--color-text-subtle);
-}
-
-.similarCard:hover .similarBrand {
-  color: var(--color-background);
-  opacity: 0.7;
-}
-
-.similarName {
-  font-size: 12px;
-  font-weight: 300;
-  text-transform: uppercase;
-  line-height: 1;
-}
-
-.similarPrice {
-  font-size: 12px;
-  font-weight: 300;
-  line-height: 1;
+.similarCardWrapper > a {
+  height: 344px;
 }
 
 /* ── Tablet ── */
 
 @media (min-width: 768px) {
+  .aboveFold {
+    height: auto;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content {
+    height: auto;
+    flex-direction: row;
+    padding: 0 var(--page-x);
+    justify-content: space-between;
+    align-items: center;
+    flex: none;
+    max-width: unset;
+    margin: unset;
+  }
+
+  .imageWrapper {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .image {
+    width: 337px;
+    height: 416px;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .productInfo {
+    width: 362px;
+    gap: 40px;
+    padding: 16px 8px;
+  }
+
+  .addToCart {
+    width: 100%;
+  }
+
   .similarGrid {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -329,32 +325,26 @@
     min-height: unset;
   }
 
-  .back {
-    padding-left: 0;
-  }
-
   .content {
     flex-direction: row;
     padding: 0;
     gap: 0;
-    align-items: flex-start;
+    align-items: center;
     flex: none;
   }
 
   .imageWrapper {
-    flex: 1;
+    flex: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 24px 0;
-    min-height: unset;
   }
 
   .image {
-    width: 100%;
-    height: 500px;
+    width: 510px;
+    height: 630px;
     object-fit: contain;
-    object-position: center center;
+    object-position: center;
   }
 
   .productInfo {
@@ -364,12 +354,17 @@
     padding: 16px 8px;
   }
 
+  .addToCart {
+    width: 100%;
+    height: 56px;
+  }
+
   .specsSection {
-    padding: 0 0 48px;
+    padding: 80px 0 0;
   }
 
   .similarSection {
-    padding: 0 0 48px;
+    padding: 80px 0 80px;
   }
 
   .similarGrid {

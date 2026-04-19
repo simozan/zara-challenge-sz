@@ -5,6 +5,7 @@ import { useCart } from '@/context/CartContext';
 import { useLoading } from '@/context/LoadingContext';
 import Logo from '@/assets/icons/logo.svg';
 import CartIcon from '@/assets/icons/cart.svg';
+import CartIconFilled from '@/assets/icons/Black bag icon.svg';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
@@ -21,7 +22,7 @@ export default function Navbar() {
         className={styles.cartLink}
         aria-label={itemCount > 0 ? `Cart, ${itemCount} items` : 'Cart, 0 items'}
       >
-        <CartIcon aria-hidden="true" />
+        {itemCount > 0 ? <CartIconFilled aria-hidden="true" /> : <CartIcon aria-hidden="true" />}
         <span className={styles.cartCount}>{itemCount}</span>
       </Link>
       {loading && (

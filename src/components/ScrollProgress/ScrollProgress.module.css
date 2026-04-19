@@ -1,0 +1,14 @@
+.track {
+  position: relative;
+  height: 1px;
+  background: var(--color-subtle);
+  margin-top: 40px;
+}
+
+.thumb {
+  position: absolute;
+  top: 0;
+  height: 1px;
+  background: var(--color-foreground);
+  transition: left 0.05s linear;
+}

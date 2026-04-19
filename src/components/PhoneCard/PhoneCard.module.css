@@ -1,0 +1,99 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px;
+  height: 344px;
+  text-decoration: none;
+  color: inherit;
+  border-right: 0.5px solid var(--color-foreground);
+  border-bottom: 0.5px solid var(--color-foreground);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  background-color: var(--color-foreground);
+  transition: height 0.4s ease;
+  z-index: 0;
+}
+
+.card:hover::after {
+  height: 100%;
+}
+
+.imageWrapper {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 31px;
+  position: relative;
+  z-index: 1;
+}
+
+.brand {
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+  transition: color 0.4s ease;
+}
+
+.nameRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.name {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-foreground);
+  transition: color 0.4s ease;
+}
+
+.price {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-foreground);
+  transition: color 0.4s ease;
+}
+
+.card:hover .brand,
+.card:hover .name,
+.card:hover .price {
+  color: var(--color-background);
+}
+
+@media (min-width: 768px) {
+  .card {
+    height: 377px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    height: 344px;
+  }
+}

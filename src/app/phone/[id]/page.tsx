@@ -1,10 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useParams, notFound } from 'next/navigation';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect, useRef } from 'react';
+import { useParams, useRouter, notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import ChevronLeft from '@/assets/icons/chevron-left.svg';
+import ColorSwatch from '@/components/ColorSwatch/ColorSwatch';
+import PhoneCard from '@/components/PhoneCard/PhoneCard';
+import ScrollProgress from '@/components/ScrollProgress/ScrollProgress';
 import { getPhoneById, ApiError } from '@/services/api';
 import { useLoading } from '@/context/LoadingContext';
 import { useCart } from '@/context/CartContext';
@@ -17,10 +20,10 @@ export default function PhoneDetailPage() {
   const { addItem } = useCart();
   const { setLoading } = useLoading();
 
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [phone, setPhone] = useState<PhoneDetail | null>(null);
   const [isNotFound, setIsNotFound] = useState(false);
   const [selectedColor, setSelectedColor] = useState<ColorOption | null>(null);
-  const [hoveredColor, setHoveredColor] = useState<ColorOption | null>(null);
   const [selectedStorage, setSelectedStorage] = useState<StorageOption | null>(null);
 
   useEffect(() => {
@@ -70,20 +73,20 @@ export default function PhoneDetailPage() {
 
   return (
     <main>
-      <div className={styles.container}>
+      <div className={styles.aboveFold}>
+        <Link href="/" className={styles.back}>
+          <ChevronLeft width={20} height={20} aria-hidden="true" />
+          BACK
+        </Link>
 
-        <div className={styles.hero}>
-          <Link href="/" className={styles.back}>
-            ‹ BACK
-          </Link>
-
+        <section className={styles.hero}>
           <div className={styles.content}>
             <div className={styles.imageWrapper}>
               <Image
                 src={currentImage}
                 alt={phone.name}
-                width={400}
-                height={400}
+                width={510}
+                height={630}
                 className={styles.image}
               />
             </div>
@@ -97,7 +100,7 @@ export default function PhoneDetailPage() {
               </div>
 
               <div>
-                <p className={styles.sectionLabel}>Storage ¿How much space do you need?</p>
+                <p className={styles.sectionLabel}>Storage. How much space do you need?</p>
                 <div role="group" aria-label="Storage options" className={styles.storageOptions}>
                   {phone.storageOptions.map((s) => (
                     <button
@@ -118,22 +121,18 @@ export default function PhoneDetailPage() {
                   role="group"
                   aria-label="Color options"
                   className={styles.colorOptions}
-                  onMouseLeave={() => setHoveredColor(null)}
                 >
                   {phone.colorOptions.map((c) => (
-                    <button
+                    <ColorSwatch
                       key={c.name}
+                      color={c}
+                      isSelected={selectedColor?.name === c.name}
                       onClick={() => setSelectedColor(c)}
-                      onMouseEnter={() => setHoveredColor(c)}
-                      aria-label={c.name}
-                      aria-pressed={selectedColor?.name === c.name}
-                      className={`${styles.colorSwatch}${selectedColor?.name === c.name ? ` ${styles.colorSwatchSelected}` : ''}`}
-                      style={{ backgroundColor: c.hexCode }}
                     />
                   ))}
                 </div>
                 <p className={styles.colorName}>
-                  {hoveredColor?.name ?? selectedColor?.name ?? '\u00A0'}
+                  {selectedColor?.name ?? '\u00A0'}
                 </p>
               </div>
 
@@ -146,8 +145,10 @@ export default function PhoneDetailPage() {
               </button>
             </div>
           </div>
-        </div>
+        </section>
+      </div>
 
+      <div className={styles.container}>
         <section className={styles.specsSection}>
           <h2 className={styles.specsTitle}>Specifications</h2>
           <table className={styles.specsTable}>
@@ -164,27 +165,15 @@ export default function PhoneDetailPage() {
 
         {phone.similarProducts.length > 0 && (
           <section className={styles.similarSection}>
-            <h2 className={styles.similarTitle}>Similar Products</h2>
-            <div className={styles.similarGrid}>
+            <h2 className={styles.similarTitle}>Similar Items</h2>
+            <div className={styles.similarScroll} ref={scrollRef}>
               {phone.similarProducts.map((p) => (
-                <Link key={p.id} href={`/phone/${p.id}`} className={styles.similarCard}>
-                  <div className={styles.similarImageWrapper}>
-                    <Image
-                      src={p.imageUrl}
-                      alt={p.name}
-                      width={200}
-                      height={200}
-                      className={styles.similarImage}
-                    />
-                  </div>
-                  <div className={styles.similarInfo}>
-                    <p className={styles.similarBrand}>{p.brand}</p>
-                    <p className={styles.similarName}>{p.name}</p>
-                    <p className={styles.similarPrice}>{p.basePrice} EUR</p>
-                  </div>
-                </Link>
+                <div key={p.id} className={styles.similarCardWrapper}>
+                  <PhoneCard phone={p} />
+                </div>
               ))}
             </div>
+            <ScrollProgress scrollRef={scrollRef} />
           </section>
         )}
 

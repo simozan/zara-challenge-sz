@@ -16,7 +16,7 @@ export default function GlobalError({
   return (
     <main style={{ padding: '2rem', textAlign: 'center' }}>
       <h2>Something went wrong</h2>
-      <p style={{ color: '#888', marginBottom: '1rem' }}>{error.message}</p>
+      <p style={{ color: 'var(--color-text-muted)', marginBottom: '1rem' }}>{error.message}</p>
       <button
         onClick={unstable_retry}
         style={{ padding: '0.75rem 1.5rem', cursor: 'pointer' }}

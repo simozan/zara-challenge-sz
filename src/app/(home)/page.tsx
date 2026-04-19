@@ -3,10 +3,10 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Phone, PhoneDetail, ColorOption } from '@/types';
 import { getPhones, getPhoneById } from '@/services/api';
-import { normalizeHex, getHue } from '@/utils/color';
+import { normalizeHex, getHue } from '@/utils';
 import { useLoading } from '@/context/LoadingContext';
 import SearchBar from './_components/SearchBar/SearchBar';
-import PhoneCard from './_components/PhoneCard/PhoneCard';
+import PhoneCard from '@/components/PhoneCard/PhoneCard';
 import styles from './page.module.css';
 
 export default function HomePage() {

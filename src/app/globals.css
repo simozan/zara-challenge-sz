@@ -13,7 +13,10 @@
 
   /* Borders */
   --color-border: #e0e0e0;
-  --color-border-strong: #cccccc;
+  --color-subtle: #cccccc;
+
+  /* Semantic */
+  --color-error: #df0000;
 
   /* Layout */
   --navbar-height: 80px;

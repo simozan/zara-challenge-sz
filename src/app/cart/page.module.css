@@ -1,0 +1,154 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - var(--navbar-height));
+  padding-top: 24px;
+}
+
+.title {
+  padding: 0 var(--page-x);
+  margin-bottom: 24px;
+  font-size: 20px;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-foreground);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  padding: 0 var(--page-x);
+}
+
+
+.imageWrapper {
+  flex-shrink: 0;
+  width: 160px;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 40px 0;
+}
+
+.name {
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-foreground);
+}
+
+.variant {
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-foreground);
+}
+
+.price {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-foreground);
+}
+
+.delete {
+  margin-top: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-error);
+  text-align: left;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 8px;
+  row-gap: 24px;
+  padding: 16px var(--page-x) 24px;
+}
+
+.total {
+  flex: 0 0 100%;
+  order: -1;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-foreground);
+}
+
+.continueBtn {
+  flex: 1;
+}
+
+.payBtn {
+  flex: 1;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 24px 40px 40px;
+    row-gap: 0;
+    column-gap: 24px;
+  }
+
+  .total {
+    flex: 0 0 auto;
+    order: 0;
+    gap: 24px;
+    margin-left: auto;
+  }
+
+  .continueBtn {
+    flex: none;
+    width: 200px;
+  }
+
+  .payBtn {
+    flex: none;
+    width: 260px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer {
+    padding-bottom: 56px;
+  }
+}
+
+@media (min-width: 768px) {
+  .imageWrapper {
+    width: 262px;
+  }
+}
+

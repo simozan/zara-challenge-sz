@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
 import CloseIcon from '@/assets/icons/close.svg';
 import { ColorOption } from '@/types';
+import ColorSwatch from '@/components/ColorSwatch/ColorSwatch';
 import styles from './SearchBar.module.css';
 
 interface SearchBarProps {
@@ -26,19 +26,6 @@ export default function SearchBar({
   selectedColor,
   onColorSelect,
 }: SearchBarProps) {
-  const filterAreaRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!filterOpen) return;
-    function handleClickOutside(e: MouseEvent) {
-      if (filterAreaRef.current && !filterAreaRef.current.contains(e.target as Node)) {
-        onFilterToggle();
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [filterOpen, onFilterToggle]);
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.inputFrame}>
@@ -61,40 +48,56 @@ export default function SearchBar({
       </div>
 
       <div className={styles.meta}>
-        <p className={styles.results}>{count} RESULTS</p>
-        <div className={styles.filterArea} ref={filterAreaRef}>
-          <button
-            className={styles.filterButton}
-            onClick={onFilterToggle}
-            aria-label="Filter by color"
-            aria-expanded={filterOpen}
-          >
-            FILTER{selectedColor ? ' (1)' : ''}
-          </button>
-          {selectedColor && (
-            <button
-              className={styles.clearFilter}
-              onClick={() => onColorSelect(null)}
-              aria-label="Clear color filter"
+        {filterOpen ? (
+          <>
+            <div
+              className={styles.swatches}
+              role="group"
+              aria-label="Color filter options"
             >
-              <CloseIcon width={14} height={14} />
-            </button>
-          )}
-          {filterOpen && (
-            <div className={styles.popover} role="group" aria-label="Color filter options">
               {availableColors.map((color) => (
-                <button
+                <ColorSwatch
                   key={color.hexCode}
-                  className={`${styles.swatch} ${selectedColor === color.hexCode ? styles.swatchSelected : ''}`}
-                  style={{ backgroundColor: color.hexCode }}
-                  onClick={() => onColorSelect(selectedColor === color.hexCode ? null : color.hexCode)}
-                  aria-label={color.name}
-                  aria-pressed={selectedColor === color.hexCode}
+                  color={color}
+                  isSelected={selectedColor === color.hexCode}
+                  onClick={() =>
+                    onColorSelect(selectedColor === color.hexCode ? null : color.hexCode)
+                  }
                 />
               ))}
             </div>
-          )}
-        </div>
+            <button
+              className={styles.cerrarButton}
+              onClick={onFilterToggle}
+              aria-label="Close color filter"
+            >
+              CLOSE
+            </button>
+          </>
+        ) : (
+          <>
+            <p className={styles.results}>{count} RESULTS</p>
+            <div className={styles.filterArea}>
+              <button
+                className={styles.filterButton}
+                onClick={onFilterToggle}
+                aria-label="Filter by color"
+                aria-expanded={filterOpen}
+              >
+                FILTER{selectedColor ? ' (1)' : ''}
+              </button>
+              {selectedColor && (
+                <button
+                  className={styles.clearFilter}
+                  onClick={() => onColorSelect(null)}
+                  aria-label="Clear color filter"
+                >
+                  <CloseIcon width={14} height={14} />
+                </button>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

@@ -1,0 +1,35 @@
+.swatch {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--color-subtle);
+  cursor: pointer;
+  padding: 1px;
+  flex-shrink: 0;
+  background-clip: content-box;
+}
+
+.swatch:hover,
+.selected {
+  border-color: var(--color-foreground);
+}
+
+.swatch::after {
+  content: attr(data-name);
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-foreground);
+  white-space: nowrap;
+  pointer-events: none;
+  display: none;
+}
+
+.swatch:hover::after {
+  display: block;
+}
+
