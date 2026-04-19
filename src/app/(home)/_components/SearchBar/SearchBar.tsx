@@ -67,7 +67,7 @@ export default function SearchBar({
               ))}
             </div>
             <button
-              className={styles.cerrarButton}
+              className={styles.closeButton}
               onClick={onFilterToggle}
               aria-label="Close color filter"
             >

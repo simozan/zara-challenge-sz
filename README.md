@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Zara Challenge — Mobile Phone Catalog
 
-## Getting Started
+A phone catalog web app built as a technical challenge. Browse phones, filter by color, view specs, and manage a cart.
 
-First, run the development server:
+## Features
+
+- Search phones by name or brand with debounced input
+- Filter by color via interactive swatches
+- Phone detail page with storage and color selectors
+- Similar products horizontal scroll
+- Persistent cart via `localStorage`
+- Responsive layout — mobile, tablet, desktop
+
+## Tech stack
+
+- **Next.js 16** (App Router) with **React 19**
+- **TypeScript**
+- **CSS Modules** with CSS custom properties
+- **Jest** + **React Testing Library** for unit and component tests
+
+## Getting started
+
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Set up environment variables
+
+Create a `.env.local` file in the root:
+
+```
+NEXT_PUBLIC_API_KEY=your_api_key_here
+```
+
+The app fetches data from `https://prueba-tecnica-api-tienda-moviles.onrender.com`.
+
+### 3. Run the dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+|---|---|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm start` | Start production server |
+| `npm test` | Run all tests |
+| `npm run test:watch` | Run tests in watch mode |
+| `npm run lint` | Lint with ESLint |
+| `npm run format` | Format with Prettier |
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/
+│   ├── (home)/          # Home page — search + phone grid
+│   ├── phone/[id]/      # Phone detail page
+│   ├── cart/            # Cart page
+│   ├── layout.tsx       # Root layout with Navbar
+│   └── globals.css      # CSS tokens and global styles
+├── components/
+│   ├── Button/          # Button / Link component
+│   ├── ColorSwatch/     # Color selector swatch
+│   ├── Navbar/          # Top navigation with cart icon
+│   ├── PhoneCard/       # Phone grid card
+│   └── ScrollProgress/  # Horizontal scroll progress bar
+├── context/
+│   └── CartContext.tsx  # Cart state + localStorage persistence
+├── services/
+│   └── api.ts           # API client with typed responses
+├── types/               # Shared TypeScript types
+└── utils.ts             # Color utility functions
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tests
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm test
+```
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Covers:
+- API service (`getPhones`, `getPhoneById`, `ApiError`)
+- Cart context (add, remove, persistence, provider guard)
+- `Button` component (button vs link rendering, variants, disabled)
+- `ColorSwatch` component (selection state, accessibility)
+- `PhoneCard` component (rendering, routing)
