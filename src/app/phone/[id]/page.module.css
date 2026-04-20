@@ -54,8 +54,8 @@
 }
 
 .image {
-  width: 344px;
-  height: 344px;
+  width: min(344px, 100%);
+  aspect-ratio: 1 / 1;
   object-fit: contain;
   object-position: left center;
 }
